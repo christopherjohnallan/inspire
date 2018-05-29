@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import TextComp from './Text';
 
 const quote = {
   text: 'Good thoughts are no better than good dreams, unless they be executed',
@@ -12,6 +13,7 @@ const Inspire = () => (
       <Text style={[styles.quoteMark, styles.quoteMarkBefore]}>&ldquo;</Text>
       <Text style={styles.quoteText}>{quote.text}</Text>
       <Text style={[styles.quoteMark, styles.quoteMarkAfter]}>&rdquo;</Text>
+      <TextComp>{quote.author}</TextComp>
     </View>
     <View style={styles.author}>
       <Text>{quote.author}</Text>

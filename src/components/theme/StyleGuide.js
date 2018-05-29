@@ -4,7 +4,7 @@ const styleGuide = {
     body: {
       fontSize: 17,
       lineHeight: 20,
-      fontFamily: 'SFProText-Regular',
+      fontFamily: 'AbrilFatface-Regular',
     },
   },
   spacing: {},

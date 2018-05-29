@@ -7,9 +7,13 @@ import { StyleGuide } from './theme';
 class TextComp extends React.PureComponent {
   static defaultProps = {
     type: 'body',
+    theme: '',
+    style: {},
     color: StyleGuide.palette.black,
     align: 'left',
     primary: false,
+    children: '',
+    numberOfLines: 0,
   };
 
   render() {
@@ -36,11 +40,14 @@ class TextComp extends React.PureComponent {
 }
 
 TextComp.propTypes = {
+  style: PropTypes.objectOf(PropTypes.any),
   type: PropTypes.string,
   color: PropTypes.string,
   align: PropTypes.string,
   primary: PropTypes.bool,
-  theme: PropTypes.string.isRequired,
+  theme: PropTypes.string,
+  children: PropTypes.string,
+  numberOfLines: PropTypes.number,
 };
 
 export default TextComp;
