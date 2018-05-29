@@ -40,7 +40,15 @@ class TextComp extends React.PureComponent {
 }
 
 TextComp.propTypes = {
-  style: PropTypes.objectOf(PropTypes.any),
+  // StyleSheet.create returns an int id for optimizations
+  // but we should still accept traditional style objects
+  style: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.number),
+    PropTypes.objectOf(PropTypes.any),
+    PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)),
+  ]),
+
   type: PropTypes.string,
   color: PropTypes.string,
   align: PropTypes.string,
