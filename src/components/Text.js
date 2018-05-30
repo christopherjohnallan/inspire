@@ -54,7 +54,7 @@ TextComp.propTypes = {
   align: PropTypes.string,
   primary: PropTypes.bool,
   theme: PropTypes.string,
-  children: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   numberOfLines: PropTypes.number,
 };
 
