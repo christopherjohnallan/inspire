@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
+import { View, TouchableWithoutFeedback, StyleSheet } from 'react-native';
 import Text from './Text';
 
-const QuotedText = ({ text }) => (
-  <View>
-    <Text style={[styles.quoteMark, styles.quoteMarkBefore]}>&ldquo;</Text>
-    <Text style={styles.quoteText}>{text}</Text>
-    <Text style={[styles.quoteMark, styles.quoteMarkAfter]}>&rdquo;</Text>
-  </View>
+const QuotedText = ({ text, onPress }) => (
+  <TouchableWithoutFeedback onPressIn={onPress}>
+    <View>
+      <Text style={[styles.quoteMark, styles.quoteMarkBefore]}>&ldquo;</Text>
+      <Text style={styles.quoteText}>{text}</Text>
+      <Text style={[styles.quoteMark, styles.quoteMarkAfter]}>&rdquo;</Text>
+    </View>
+  </TouchableWithoutFeedback>
 );
 
 const styles = StyleSheet.create({
@@ -30,8 +32,13 @@ const styles = StyleSheet.create({
   },
 });
 
+QuotedText.defaultProps = {
+  onPress: null,
+};
+
 QuotedText.propTypes = {
   text: PropTypes.string.isRequired,
+  onPress: PropTypes.func,
 };
 
 export default QuotedText;
