@@ -5,15 +5,20 @@ import Text from './Text';
 
 const QuotedText = ({ text, onPress }) => (
   <TouchableWithoutFeedback onPressIn={onPress}>
-    <View>
-      <Text style={[styles.quoteMark, styles.quoteMarkBefore]}>&ldquo;</Text>
-      <Text style={styles.quoteText}>{text}</Text>
-      <Text style={[styles.quoteMark, styles.quoteMarkAfter]}>&rdquo;</Text>
+    <View style={styles.quote}>
+      <View>
+        <Text style={[styles.quoteMark, styles.quoteMarkBefore]}>&ldquo;</Text>
+        <Text style={styles.quoteText}>{text}</Text>
+        <Text style={[styles.quoteMark, styles.quoteMarkAfter]}>&rdquo;</Text>
+      </View>
     </View>
   </TouchableWithoutFeedback>
 );
 
 const styles = StyleSheet.create({
+  quote: {
+    flex: 1,
+  },
   quoteText: {
     marginTop: 70,
     marginBottom: 70,
