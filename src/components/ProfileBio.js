@@ -1,19 +1,21 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableWithoutFeedback, Linking } from 'react-native';
 import PropTypes from 'prop-types';
 
 const ProfileBio = ({
-  name, imageUri, yearOfBirth, yearOfDeath,
+  name, imageUri, yearOfBirth, yearOfDeath, url,
 }) => (
-  <View style={{ flex: 1, flexDirection: 'row' }}>
-    <Image style={styles.image} source={{ uri: imageUri }} />
-    <View style={styles.info}>
-      <Text>{name}</Text>
-      <Text>
-        {yearOfBirth} - {yearOfDeath}
-      </Text>
+  <TouchableWithoutFeedback onPressIn={() => Linking.openURL(url)}>
+    <View style={{ flex: 1, flexDirection: 'row' }}>
+      <Image style={styles.image} source={{ uri: imageUri }} />
+      <View style={styles.info}>
+        <Text>{name}</Text>
+        <Text>
+          {yearOfBirth} - {yearOfDeath}
+        </Text>
+      </View>
     </View>
-  </View>
+  </TouchableWithoutFeedback>
 );
 
 const styles = StyleSheet.create({
@@ -28,12 +30,14 @@ const styles = StyleSheet.create({
 
 ProfileBio.defaultProps = {
   yearOfDeath: null,
-  imageUri: null, // update to a locally stored generic profile shape picture
+  imageUri: null, // TODO: update to a locally stored generic profile shape picture
+  url: null,
 };
 
 ProfileBio.propTypes = {
   name: PropTypes.string.isRequired,
   imageUri: PropTypes.string,
+  url: PropTypes.string,
   yearOfBirth: PropTypes.number.isRequired,
   yearOfDeath: PropTypes.number,
 };

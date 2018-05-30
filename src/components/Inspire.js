@@ -13,6 +13,7 @@ const quotes = [
       yearOfDeath: 1882,
       imageUri:
         'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Ralph_Waldo_Emerson_ca1857_retouched.jpg/220px-Ralph_Waldo_Emerson_ca1857_retouched.jpg',
+      url: 'https://en.wikipedia.org/wiki/Ralph_Waldo_Emerson',
     },
   },
   {
@@ -24,6 +25,7 @@ const quotes = [
       yearOfDeath: 1970,
       imageUri:
         'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/E._M._Forster_von_Dora_Carrington%2C_1924-25.jpg/200px-E._M._Forster_von_Dora_Carrington%2C_1924-25.jpg',
+      url: 'https://en.wikipedia.org/wiki/E._M._Forster',
     },
   },
 ];
@@ -49,6 +51,7 @@ class Inspire extends React.Component {
           <ProfileBio
             name={quote.author.name}
             imageUri={quote.author.imageUri}
+            url={quote.author.url}
             yearOfBirth={quote.author.yearOfBirth}
             yearOfDeath={quote.author.yearOfDeath}
           />
