@@ -4,32 +4,59 @@ import QuotedText from './QuotedText';
 import ProfileBio from './ProfileBio';
 import { StyleGuide } from './theme';
 
-const quote = {
-  text: 'Good thoughts are no better than good dreams, unless they be executed',
-  author: {
-    name: 'Ralph Waldo Emerson',
-    yearOfBirth: 1803,
-    yearOfDeath: 1882,
-    imageUri:
-      'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Ralph_Waldo_Emerson_ca1857_retouched.jpg/220px-Ralph_Waldo_Emerson_ca1857_retouched.jpg',
+const quotes = [
+  {
+    text: 'Good thoughts are no better than good dreams, unless they be executed',
+    author: {
+      name: 'Ralph Waldo Emerson',
+      yearOfBirth: 1803,
+      yearOfDeath: 1882,
+      imageUri:
+        'http://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Ralph_Waldo_Emerson_ca1857_retouched.jpg/220px-Ralph_Waldo_Emerson_ca1857_retouched.jpg',
+    },
   },
-};
+  {
+    text:
+      'We must be willing to let go of the life we have so as to have the life that is waiting for us',
+    author: {
+      name: 'E. M. Forster',
+      yearOfBirth: 1879,
+      yearOfDeath: 1970,
+      imageUri:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/E._M._Forster_von_Dora_Carrington%2C_1924-25.jpg/200px-E._M._Forster_von_Dora_Carrington%2C_1924-25.jpg',
+    },
+  },
+];
 
-const Inspire = () => (
-  <View style={styles.container}>
-    <View style={styles.quote}>
-      <QuotedText text={quote.text} />
-    </View>
-    <View style={styles.author}>
-      <ProfileBio
-        name={quote.author.name}
-        imageUri={quote.author.imageUri}
-        yearOfBirth={quote.author.yearOfBirth}
-        yearOfDeath={quote.author.yearOfDeath}
-      />
-    </View>
-  </View>
-);
+class Inspire extends React.Component {
+  state = { quoteIndex: 1, quote: quotes[0] };
+
+  getQuote = () => {
+    this.setState({
+      quote: quotes[this.state.quoteIndex % 2],
+      quoteIndex: this.state.quoteIndex + 1,
+    });
+  };
+
+  render() {
+    const { quote } = this.state;
+    return (
+      <View style={styles.container}>
+        <View style={styles.quote}>
+          <QuotedText text={quote.text} onPress={() => this.getQuote()} />
+        </View>
+        <View style={styles.author}>
+          <ProfileBio
+            name={quote.author.name}
+            imageUri={quote.author.imageUri}
+            yearOfBirth={quote.author.yearOfBirth}
+            yearOfDeath={quote.author.yearOfDeath}
+          />
+        </View>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
