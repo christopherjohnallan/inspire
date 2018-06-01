@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableWithoutFeedback, Linking } from 'react-native';
+import { View, Image, StyleSheet, TouchableWithoutFeedback, Linking } from 'react-native';
 import PropTypes from 'prop-types';
+import Text from './Text';
 
 const ProfileBio = ({
   name, imageUri, dateOfBirth, dateOfDeath, url,
@@ -9,7 +10,9 @@ const ProfileBio = ({
     <View style={{ flex: 1, flexDirection: 'row' }}>
       <Image style={styles.image} source={{ uri: imageUri }} />
       <View style={styles.info}>
-        <Text>{name}</Text>
+        <Text numberOfLines={1} adjustsFontSizeToFit>
+          {name}
+        </Text>
         <Text>
           {dateOfBirth} {dateOfBirth && dateOfDeath && '-'} {dateOfDeath}
         </Text>
@@ -24,6 +27,7 @@ const styles = StyleSheet.create({
     height: 150,
   },
   info: {
+    flex: 1,
     paddingLeft: 10,
   },
 });

@@ -14,11 +14,19 @@ class TextComp extends React.PureComponent {
     primary: false,
     children: '',
     numberOfLines: 0,
+    adjustsFontSizeToFit: false,
   };
 
   render() {
     const {
-      theme, type, style, children, primary, numberOfLines, align: textAlign,
+      theme,
+      type,
+      style,
+      children,
+      primary,
+      numberOfLines,
+      adjustsFontSizeToFit,
+      align: textAlign,
     } = this.props;
     const typography = StyleGuide.typography[type];
     const color = (() => {
@@ -32,7 +40,7 @@ class TextComp extends React.PureComponent {
     const computedStyle = [typography, { textAlign, color }];
     computedStyle.push(style);
     return (
-      <Text style={computedStyle} {...{ numberOfLines }}>
+      <Text style={computedStyle} {...{ numberOfLines, adjustsFontSizeToFit }}>
         {children}
       </Text>
     );
@@ -56,6 +64,7 @@ TextComp.propTypes = {
   theme: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   numberOfLines: PropTypes.number,
+  adjustsFontSizeToFit: PropTypes.bool,
 };
 
 export default TextComp;
