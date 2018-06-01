@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableWithoutFeedback, Linking } from
 import PropTypes from 'prop-types';
 
 const ProfileBio = ({
-  name, imageUri, yearOfBirth, yearOfDeath, url,
+  name, imageUri, dateOfBirth, dateOfDeath, url,
 }) => (
   <TouchableWithoutFeedback onPressIn={() => Linking.openURL(url)}>
     <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -11,7 +11,7 @@ const ProfileBio = ({
       <View style={styles.info}>
         <Text>{name}</Text>
         <Text>
-          {yearOfBirth} - {yearOfDeath}
+          {dateOfBirth} {dateOfBirth && dateOfDeath && '-'} {dateOfDeath}
         </Text>
       </View>
     </View>
@@ -29,17 +29,19 @@ const styles = StyleSheet.create({
 });
 
 ProfileBio.defaultProps = {
-  yearOfDeath: null,
+  name: null,
   imageUri: null, // TODO: update to a locally stored generic profile shape picture
   url: null,
+  dateOfBirth: null,
+  dateOfDeath: null,
 };
 
 ProfileBio.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   imageUri: PropTypes.string,
   url: PropTypes.string,
-  yearOfBirth: PropTypes.number.isRequired,
-  yearOfDeath: PropTypes.number,
+  dateOfBirth: PropTypes.string,
+  dateOfDeath: PropTypes.string,
 };
 
 export default ProfileBio;

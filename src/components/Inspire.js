@@ -3,33 +3,48 @@ import { StyleSheet, View } from 'react-native';
 import QuotedText from './QuotedText';
 import ProfileBio from './ProfileBio';
 import { StyleGuide } from './theme';
-
-const quotes = require('../json/quote-data.json');
+import { getQuote } from '../api/quoteApi';
 
 class Inspire extends React.Component {
-  state = { quoteIndex: 1, quote: quotes[0] };
+  state = {
+    quote: null,
+    quoteLoading: false,
+  };
 
-  getQuote = () => {
-    this.setState({
-      quote: quotes[this.state.quoteIndex % 2],
-      quoteIndex: this.state.quoteIndex + 1,
-    });
+  componentWillMount() {
+    this.updateQuote();
+  }
+
+  updateQuote = async () => {
+    if (!this.state.quoteLoading) {
+      await this.setState({
+        quoteLoading: true,
+      });
+      const quote = await getQuote();
+      await this.setState({
+        quote,
+        quoteLoading: false,
+      });
+    }
   };
 
   render() {
     const { quote } = this.state;
+    if (this.state.quote == null) {
+      return <View />;
+    }
     return (
       <View style={styles.container}>
         <View style={styles.quote}>
-          <QuotedText text={quote.text} onPress={() => this.getQuote()} />
+          <QuotedText text={quote.text} onPress={() => this.updateQuote()} />
         </View>
         <View style={styles.author}>
           <ProfileBio
             name={quote.author.name}
             imageUri={quote.author.imageUri}
             url={quote.author.url}
-            yearOfBirth={quote.author.yearOfBirth}
-            yearOfDeath={quote.author.yearOfDeath}
+            dateOfBirth={quote.author.dateOfBirth}
+            dateOfDeath={quote.author.dateOfDeath}
           />
         </View>
       </View>
@@ -41,7 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'teal',
-    paddingTop: 20,
+    paddingTop: 40,
     paddingBottom: 20,
     paddingLeft: 15,
     paddingRight: 15,
